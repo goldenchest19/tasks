@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Task1 {
 
     public static void main(String[] args) {
@@ -161,7 +163,7 @@ public class Task1 {
 //      кубов.
     public static int sumOfCubes(int[] array) {
         int sums = 0;
-        for (double v : array) {
+        for (int v : array) {
             sums += v * v * v;
         }
         return sums;
