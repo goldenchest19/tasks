@@ -61,6 +61,27 @@ public class Task2 {
 
 
 //        task8
+//        System.out.println(isStrangePair("ratio", "orator")); // -> true
+//        System.out.println(isStrangePair("sparkling", "groups")); // -> true
+//        System.out.println(isStrangePair("bush", "hubris")); // false
+//        System.out.println(isStrangePair("", "")); // // -> true
+//        System.out.println(isStrangePair("ab", "ba")); // -> true
+
+
+//        task9
+//        System.out.println(isPrefix("automation", "auto-")); // -> true
+//        System.out.println(isPrefix("retrospect", "sub-")); // -> false
+//        System.out.println(isSuffix("arachnophobia", "-phobia")); // -> true
+//        System.out.println(isSuffix("vocation", "-logy")); // -> false
+
+
+//         task10
+//        System.out.println(boxSeq(0)); // -> 0
+//        System.out.println(boxSeq(1)); // -> 3
+//        System.out.println(boxSeq(2)); // -> 2
+//        System.out.println(boxSeq(5)); // -> 7
+//        System.out.println(boxSeq(8)); // -> 8
+//        System.out.println(boxSeq(9)); // -> 11
 
     }
 
@@ -165,42 +186,65 @@ public class Task2 {
     }
 
 
-//            8. Пара строк образует странную пару, если оба из следующих условий истинны:
+    //            8. Пара строк образует странную пару, если оба из следующих условий истинны:
 //            – Первая буква 1-й строки = последняя буква 2-й строки.
 //            – Последняя буква 1-й строки = первая буква 2-й строки.
 //            – Создайте функцию, которая возвращает true, если пара строк представляет собой
 //    странную пару, и false в противном случае.
-//            Пример:
-//    isStrangePair("ratio", "orator") ➞ true
-//    // "ratio" ends with "o" and "orator" starts with "o".
-//// "ratio" starts with "r" and "orator" ends with "r".
-//    isStrangePair("sparkling", "groups") ➞ true
-//    isStrangePair("bush", "hubris") ➞ false
-//    isStrangePair("", "") ➞ true
+    public static boolean isStrangePair(String firstLine, String secondLine) {
+
+        if (firstLine.isEmpty() && secondLine.isEmpty()) {
+            return true;
+        }
+
+        char firstCharacterFirstLine = firstLine.charAt(0);
+        char lastCharacterSecondLine = secondLine.charAt(secondLine.length() - 1);
+
+        char lastCharacterFirstLine = firstLine.charAt(firstLine.length() - 1);
+        char firstCharacterSecondLine = secondLine.charAt(0);
+
+        return firstCharacterFirstLine == lastCharacterSecondLine && lastCharacterFirstLine == firstCharacterSecondLine;
+    }
 
 
-
-
-//            9. Создайте две функции: isPrefix(word, prefix-) и isSuffix (word, -suffix).
+    //            9. Создайте две функции: isPrefix(word, prefix-) и isSuffix (word, -suffix).
 //            – isPrefix должен возвращать true, если он начинается с префиксного аргумента.
 //            – isSuffix должен возвращать true, если он заканчивается аргументом суффикса.
-//– В противном случае верните false.  
-//    Пример:
-//    isPrefix("automation", "auto-") ➞ true
-//    isSuffix("arachnophobia", "-phobia") ➞ true
-//    isPrefix("retrospect", "sub-") ➞ false
-//    isSuffix("vocation", "-logy") ➞ false
-//    Примечание:
-//    Аргументы префикса и суффикса имеют тире - в них.
+//–              В противном случае верните false.
+    public static boolean isPrefix(String firstWord, String secondWord) {
+
+        secondWord = secondWord.substring(0, secondWord.length() - 1);
+        System.out.println(secondWord);
+        return firstWord.startsWith(secondWord);
+    }
+
+    public static boolean isSuffix(String firstWord, String secondWord) {
+        secondWord = secondWord.substring(1, secondWord.length());
+        System.out.println(secondWord);
+        return firstWord.endsWith(secondWord);
+    }
+
+
 //            10. Создайте функцию, которая принимает число (шаг) в качестве аргумента и
 //    возвращает количество полей на этом шаге последовательности.
 //            Шаг 0: начните с 0
 //    Шаг 1: Добавьте 3
 //    Шаг 2: Вычтите 1
 //    Повторите Шаги 1 И 2 ...
-//    Пример:
-//    boxSeq(0) ➞ 0
-//    boxSeq(1) ➞ 3
-//    boxSeq(2) ➞ 2
+    public static int boxSeq(int number) {
+        int sum = 0;
+        if (number >= 1) {
+            sum = 3;
+        }
+        for (int i = 2; i <= number; i++) {
+            if (i % 2 == 1) {
+                sum += 3;
+            }
+            if (i % 2 == 0) {
+                sum -= 1;
+            }
+        }
+        return sum;
+    }
 
 }
