@@ -4,84 +4,92 @@ public class Task2 {
 
     public static void main(String[] args) {
 //        task1
-//        System.out.println(repeat("mice", 5)); // ➞ "mmmmmiiiiiccccceeeee"
-//        System.out.println(repeat("hello", 3)); // ➞ "hhheeellllllooo"
-//        System.out.println(repeat("stop", 1) ); // ➞ "stop"
-
+        System.out.println(repeat("mice", 5)); // ➞ "mmmmmiiiiiccccceeeee"
+        System.out.println(repeat("hello", 3)); // ➞ "hhheeellllllooo"
+        System.out.println(repeat("stop", 1) ); // ➞ "stop"
+        System.out.println();
 
 //        task2
-//        System.out.println(differenceMaxMin(new int[] {10, 4, 1, 4, -10, -50, 32, 21})); // -> 82
-//        System.out.println(differenceMaxMin(new int[] {44, 32, 86, 19})); // -> 67
-
+        System.out.println(differenceMaxMin(new int[] {10, 4, 1, 4, -10, -50, 32, 21})); // -> 82
+        System.out.println(differenceMaxMin(new int[] {44, 32, 86, 19})); // -> 67
+        System.out.println();
 
 //        task3
-//        System.out.println(isAvgWhole(new int[] {1,3})); // ➞ true
-//        System.out.println(isAvgWhole(new int[] {1,2,3,4})); //  ➞ false
-//        System.out.println(isAvgWhole(new int[] {1, 5, 6})); // ➞ true
-//        System.out.println(isAvgWhole(new int[] {1,1,1})); // ➞ true
-//        System.out.println(isAvgWhole(new int[] {9, 2, 2, 5})); //  ➞ false
+        System.out.println(isAvgWhole(new int[] {1,3})); // ➞ true
+        System.out.println(isAvgWhole(new int[] {1,2,3,4})); //  ➞ false
+        System.out.println(isAvgWhole(new int[] {1, 5, 6})); // ➞ true
+        System.out.println(isAvgWhole(new int[] {1,1,1})); // ➞ true
+        System.out.println(isAvgWhole(new int[] {9, 2, 2, 5})); //  ➞ false
+        System.out.println();
 
 
 //        task4
-//        int[] massive1 = cumulativeSum(new int[] {1, 2 ,3}); // -> 1 3 6
-//        for (int el : massive1) {
-//            System.out.print(el + " ");
-//        }
-//        System.out.println();
-//
-//        int[] massive2 = cumulativeSum(new int[] {1, -2 ,3}); // -> 1 -1 2
-//        for (int el : massive2) {
-//            System.out.print(el + " ");
-//        }
-//        System.out.println();
-//
-//        int[] massive3 = cumulativeSum(new int[] {3, 3, -2, 408, 3, 3}); // -> 3 6 4 412 415 418
-//        for (int el : massive3) {
-//            System.out.print(el + " ");
-//        }
+        int[] massive1 = cumulativeSum(new int[] {1, 2 ,3}); // -> 1 3 6
+        for (int el : massive1) {
+            System.out.print(el + " ");
+        }
+        System.out.println();
 
+        int[] massive2 = cumulativeSum(new int[] {1, -2 ,3}); // -> 1 -1 2
+        for (int el : massive2) {
+            System.out.print(el + " ");
+        }
+        System.out.println();
+
+        int[] massive3 = cumulativeSum(new int[] {3, 3, -2, 408, 3, 3}); // -> 3 6 4 412 415 418
+        for (int el : massive3) {
+            System.out.print(el + " ");
+        }
+        System.out.println();
+
+        System.out.println();
 
 //        task5
-//        System.out.println(getDecimalPlaces("43.20")); // -> 2
-//        System.out.println(getDecimalPlaces("400")); // 0
-//        System.out.println(getDecimalPlaces("3.1002")); // 4
+        System.out.println(getDecimalPlaces("43.20")); // -> 2
+        System.out.println(getDecimalPlaces("400")); // 0
+        System.out.println(getDecimalPlaces("3.1002")); // 4
+        System.out.println();
 
 
 //        task6
-//        System.out.println(Fibonacci(3)); // -> 2
-//        System.out.println(Fibonacci(7)); // -> 13
-//        System.out.println(Fibonacci(12)); // -> 144
+        System.out.println(fibonacci(3)); // -> 2
+        System.out.println(fibonacci(7)); // -> 13
+        System.out.println(fibonacci(12)); // -> 144
+        System.out.println();
 
 
 //        task7
-//        System.out.println(isValid("59001")); // ➞ true
-//        System.out.println(isValid("853a7")); // -> false
-//        System.out.println(isValid("73 32")); // -> false
-//        System.out.println(isValid("393939")); // -> false
+        System.out.println(isValid("59001")); // ➞ true
+        System.out.println(isValid("853a7")); // -> false
+        System.out.println(isValid("73 32")); // -> false
+        System.out.println(isValid("393939")); // -> false
+        System.out.println();
 
 
 //        task8
-//        System.out.println(isStrangePair("ratio", "orator")); // -> true
-//        System.out.println(isStrangePair("sparkling", "groups")); // -> true
-//        System.out.println(isStrangePair("bush", "hubris")); // false
-//        System.out.println(isStrangePair("", "")); // // -> true
-//        System.out.println(isStrangePair("ab", "ba")); // -> true
+        System.out.println(isStrangePair("ratio", "orator")); // -> true
+        System.out.println(isStrangePair("sparkling", "groups")); // -> true
+        System.out.println(isStrangePair("bush", "hubris")); // false
+        System.out.println(isStrangePair("", "")); // // -> true
+        System.out.println(isStrangePair("ab", "ba")); // -> true
+        System.out.println();
 
 
 //        task9
-//        System.out.println(isPrefix("automation", "auto-")); // -> true
-//        System.out.println(isPrefix("retrospect", "sub-")); // -> false
-//        System.out.println(isSuffix("arachnophobia", "-phobia")); // -> true
-//        System.out.println(isSuffix("vocation", "-logy")); // -> false
+        System.out.println(isPrefix("automation", "auto-")); // -> true
+        System.out.println(isPrefix("retrospect", "sub-")); // -> false
+        System.out.println(isSuffix("arachnophobia", "-phobia")); // -> true
+        System.out.println(isSuffix("vocation", "-logy")); // -> false
+        System.out.println();
 
 
 //         task10
-//        System.out.println(boxSeq(0)); // -> 0
-//        System.out.println(boxSeq(1)); // -> 3
-//        System.out.println(boxSeq(2)); // -> 2
-//        System.out.println(boxSeq(5)); // -> 7
-//        System.out.println(boxSeq(8)); // -> 8
-//        System.out.println(boxSeq(9)); // -> 11
+        System.out.println(boxSeq(0)); // -> 0
+        System.out.println(boxSeq(1)); // -> 3
+        System.out.println(boxSeq(2)); // -> 2
+        System.out.println(boxSeq(5)); // -> 7
+        System.out.println(boxSeq(8)); // -> 8
+        System.out.println(boxSeq(9)); // -> 11
 
     }
 
@@ -124,7 +132,8 @@ public class Task2 {
         for (int el : array) {
             sum += el;
         }
-        return sum / array.length == (double) sum / array.length;
+//        return sum / array.length == (double) sum / array.length;
+        return sum % array.length == 0;
     }
 
 
@@ -150,7 +159,7 @@ public class Task2 {
         }
         String newNumber = number;
         int startDecimalPlace = newNumber.indexOf(".");
-        String decimalPlace = newNumber.substring(startDecimalPlace, newNumber.length());
+        String decimalPlace = newNumber.substring(startDecimalPlace);
         return decimalPlace.length() - 1;
     }
 
@@ -176,7 +185,7 @@ public class Task2 {
 
     public static boolean isValid(String index) {
         String regex = "\\d+"; // + означает "один или несколько раз" и \d означает "цифра"
-        if (index.length() <= 5) {
+        if (index.length() == 5) {
             if (index.matches(regex)) {
                 return true;
             }
@@ -213,13 +222,11 @@ public class Task2 {
     public static boolean isPrefix(String firstWord, String secondWord) {
 
         secondWord = secondWord.substring(0, secondWord.length() - 1);
-        System.out.println(secondWord);
         return firstWord.startsWith(secondWord);
     }
 
     public static boolean isSuffix(String firstWord, String secondWord) {
-        secondWord = secondWord.substring(1, secondWord.length());
-        System.out.println(secondWord);
+        secondWord = secondWord.substring(1);
         return firstWord.endsWith(secondWord);
     }
 
