@@ -1,9 +1,8 @@
-import java.math.BigInteger;
-import java.sql.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 public class Task3 {
-
     public static void main(String[] args) {
 
 //        test1
@@ -268,7 +267,7 @@ public class Task3 {
         if (isSimple(number)) {
             return number;
         }
-        while(!isSimple(number)) {
+        while (!isSimple(number)) {
             number++;
         }
         return number;
@@ -286,7 +285,7 @@ public class Task3 {
     }
 
 
-//            10. Учитывая три числа, x, y и z, определите, являются ли они ребрами
+    //            10. Учитывая три числа, x, y и z, определите, являются ли они ребрами
 //    прямоугольного треугольника.
     public static boolean rightTriangle(int x, int y, int z) {
         if (!(x + y > z) || !(x + z > y) || !(y + z > x)) {
