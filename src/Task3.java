@@ -106,7 +106,7 @@ public class Task3 {
 //    Верхний регистр " Zip "- это не то же самое, что нижний регистр "zip".
     public static int findZip(String line) {
         String newLine = line.replaceFirst("zip", "***");
-        System.out.println(newLine);
+//        System.out.println(newLine);
         return newLine.indexOf("zip");
     }
 
@@ -118,7 +118,7 @@ public class Task3 {
 //    Точно так же 28-это совершенное число, так как 1 + 2 + 4 + 7 + 14 = 28.
     public static boolean checkPerfect(int number) {
         int sum = 0;
-        for (int i = 1; i < number; i++) {
+        for (int i = 1; i <= number/2; i++) {
             if (number % i == 0) {
                 sum += i;
             }
@@ -183,14 +183,12 @@ public class Task3 {
             arrayList1.add(j);
         }
         Set<Integer> set1 = new LinkedHashSet<>(arrayList1);
-        System.out.println("set1" + set1);
 
         ArrayList<Integer> arrayList2 = new ArrayList<>(secondArray.length);
         for (int j : secondArray) {
             arrayList2.add(j);
         }
         Set<Integer> set2 = new LinkedHashSet<>(arrayList2);
-        System.out.println("set2" + set2);
 
 
         return set1.size() == set2.size();
@@ -236,8 +234,6 @@ public class Task3 {
     //8. Напишите функцию, которая возвращает самую длинную последовательность
 //    последовательных нулей в двоичной строке.
     public static String longestZero(String number) {
-        StringBuilder nulls = new StringBuilder();
-
         int length = 0;
         int maxLength = 0;
         char[] array = number.toCharArray();
@@ -254,10 +250,8 @@ public class Task3 {
             maxLength = Math.max(maxLength, length);
         }
 
-        for (int i = 0; i < maxLength; i++) {
-            nulls = nulls.append("0");
-        }
-        return String.valueOf(nulls);
+
+        return "0".repeat(maxLength);
     }
 
 
