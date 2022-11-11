@@ -1,3 +1,7 @@
+import java.math.BigInteger;
+import java.sql.Array;
+import java.util.*;
+
 public class Task3 {
 
     public static void main(String[] args) {
@@ -24,16 +28,57 @@ public class Task3 {
 
 
 //        test4
-//        System.out.println(flipEndChars("Cat, dog, and mouse."));
-//        System.out.println(flipEndChars("ada"));
-//        System.out.println(flipEndChars("Ada"));
-//        System.out.println(flipEndChars("z"));
+//        System.out.println(flipEndChars("Cat, dog, and mouse.")); // ->  .at, dog, and mouseC
+//        System.out.println(flipEndChars("ada")); // -> Two's a pair.
+//        System.out.println(flipEndChars("Ada")); // -> adA
+//        System.out.println(flipEndChars("z")); // -> Incompatible.
 
 
-        //    flipEndChars("Cat, dog, and mouse.") ➞ ".at, dog, and mouseC"
-//    flipEndChars("ada") ➞ "Two's a pair."
-//    flipEndChars("Ada") ➞ "adA"
-//    flipEndChars("z") ➞ "Incompatible."
+//        test5
+//        System.out.println(isValidHexCode("#CD5C5C")); // -> true
+//        System.out.println(isValidHexCode("#EAECEE")); // -> true
+//        System.out.println(isValidHexCode("#eaecee")); // -> true
+//        System.out.println(isValidHexCode("#CD5C58C")); // -> false
+//        System.out.println(isValidHexCode("#CD5C5Z")); // -> false
+//        System.out.println(isValidHexCode("#CD5C&C")); // -> false
+//        System.out.println(isValidHexCode("CD5C5C")); // -> false
+
+
+//        test6
+//        System.out.println(same(new int[]{1, 2, 3, 2, 4, 6, 4}, new int[]{1, 2, 3, 90, 20})); // -> true
+//        System.out.println(same(new int[]{1, 3, 4, 4, 4}, new int[]{2, 5, 7})); // -> true
+//        System.out.println(same(new int[]{1, 3, 4, 4, 4}, new int[]{2, 5, 7})); // -> true
+//        System.out.println(same(new int[]{9, 8, 7, 6}, new int[]{4, 4, 3, 1})); // -> false
+//        System.out.println(same(new int[]{2}, new int[]{3, 3, 3, 3, 3})); // -> true
+
+
+//        test 7
+//        System.out.println(isKaprekar(3)); // ->  false
+//        System.out.println(isKaprekar(5)); // ->  false
+//        System.out.println(isKaprekar(297)); // ->  true
+//        System.out.println(isKaprekar(100)); // ->  false
+//        System.out.println(isKaprekar(77778)); // ->  true
+//        System.out.println(isKaprekar(77779)); // ->  false
+//        System.out.println(isKaprekar(45)); // ->  true
+
+
+//        test 8
+//        System.out.println(longestZero("01100001011000")); // -> 0000
+//        System.out.println(longestZero("100100100")); // -> 00
+//        System.out.println(longestZero("11111")); // -> ""
+
+
+//        test 9
+//        System.out.println(nextPrime(12)); // -> 13
+//        System.out.println(nextPrime(24)); // -> 29
+//        System.out.println(nextPrime(11)); // -> 11
+
+
+//        test 10
+//        System.out.println(rightTriangle(3, 4, 5)); // ➞ true
+//        System.out.println(rightTriangle(145, 105, 100)); // ➞ true
+//        System.out.println(rightTriangle(70, 130, 110)); // ➞ false
+//        System.out.println(rightTriangle(1, 1, 100)); // ➞ false
     }
 
     //    1. Квадратное уравнение ax2 + bx + c = 0 имеет либо 0, либо 1, либо 2 различных
@@ -97,90 +142,159 @@ public class Task3 {
         String newLine = line;
         if (newLine.length() < 2) {
             return "Incompatible.";
-        } if (newLine.charAt(0) == newLine.charAt(newLine.length() - 1)) {
+        }
+        if (newLine.charAt(0) == newLine.charAt(newLine.length() - 1)) {
             return "Two's a pair.";
         }
         char firstSymbol = newLine.charAt(0);
-        char lastSymbol = newLine.charAt(newLine.length()-1);
-        System.out.println("first  step " + newLine);
-        newLine = newLine.replace(firstSymbol, lastSymbol);
-        System.out.println("second step " + newLine);
-//        String finalLine = newLine.replace("", firstSymbol);
-//        System.out.println("last step " + finalLine);
 
-        return finalLine;
+        StringBuilder stringBuilder = new StringBuilder(newLine);
+
+        stringBuilder.setCharAt(0, stringBuilder.charAt(stringBuilder.length() - 1));
+        stringBuilder.setCharAt(stringBuilder.length() - 1, firstSymbol);
+
+
+        return stringBuilder.toString();
     }
 
-//            5. Создайте функцию, которая определяет, является ли строка допустимым
+
+    //            5. Создайте функцию, которая определяет, является ли строка допустимым
 //    шестнадцатеричным кодом.
 //    Шестнадцатеричный код должен начинаться с фунтового ключа # и иметь длину ровно 6
 //    символов. Каждый символ должен быть цифрой от 0-9 или буквенным символом от A-F.
 //    все буквенные символы могут быть прописными или строчными.
-//    Пример:
-//    isValidHexCode("#CD5C5C") ➞ true
-//    isValidHexCode("#EAECEE") ➞ true
-//    isValidHexCode("#eaecee") ➞ true
-//    isValidHexCode("#CD5C58C") ➞ false
-//    // Length exceeds 6
-//    isValidHexCode("#CD5C5Z") ➞ false
-//    // Not all alphabetic characters in A-F
-//    isValidHexCode("#CD5C&C") ➞ false
-//    // Contains unacceptable character
-//    isValidHexCode("CD5C5C") ➞ false
-//// Missing #
-//            6. Напишите функцию, которая возвращает true, если два массива имеют одинаковое
+    public static boolean isValidHexCode(String code) {
+        if (!code.startsWith("#")) {
+            return false;
+        }
+        if (!(code.length() == 7)) {
+            return false;
+        }
+        String line = code.substring(1);
+        // uses regular expressions
+        return line.matches("^[0-9a-fA-F]+$");
+    }
+
+
+    //            6. Напишите функцию, которая возвращает true, если два массива имеют одинаковое
 //    количество уникальных элементов, и false в противном случае.
-//    Для примера:
-//    arr1 = [1, 3, 4, 4, 4]
-//    arr2 = [2, 5, 7]
-//    В arr1 число 4 появляется трижды, что означает, что оно содержит три уникальных
-//    элемента: [1, 3, 4]. Поскольку arr1 и arr2 содержат одинаковое количество уникальных
-//    элементов, этот пример вернет значение true.
-//    Пример:
-//    same([1, 3, 4, 4, 4], [2, 5, 7]) ➞ true
-//    same([9, 8, 7, 6], [4, 4, 3, 1]) ➞ false
-//    same([2], [3, 3, 3, 3, 3]) ➞ true
-//            7. Число Капрекара-это положительное целое число, которое после возведения в
+    public static boolean same(int[] firstArray, int[] secondArray) {
+        ArrayList<Integer> arrayList1 = new ArrayList<>(firstArray.length);
+        for (int j : firstArray) {
+            arrayList1.add(j);
+        }
+        Set<Integer> set1 = new LinkedHashSet<>(arrayList1);
+        System.out.println("set1" + set1);
+
+        ArrayList<Integer> arrayList2 = new ArrayList<>(secondArray.length);
+        for (int j : secondArray) {
+            arrayList2.add(j);
+        }
+        Set<Integer> set2 = new LinkedHashSet<>(arrayList2);
+        System.out.println("set2" + set2);
+
+
+        return set1.size() == set2.size();
+    }
+
+
+    //            7. Число Капрекара-это положительное целое число, которое после возведения в
 //    квадрат и разбиения на две лексикографические части равно сумме двух
 //    полученных новых чисел:
 //            – Если количество цифр квадратного числа четное, то левая и правая части будут иметь
 //    одинаковую длину.
 //            – Если количество цифр квадратного числа нечетно, то правая часть будет самой длинной
-//    половиной, а левая-самой маленькой или равной нулю, если количество цифр равно 1.– Учитывая положительное целое число n, реализуйте функцию, которая возвращает true,
+//    половиной, а левая-самой маленькой или равной нулю, если количество цифр равно 1.–
+//    Учитывая положительное целое число n, реализуйте функцию, которая возвращает true,
 //    если это число Капрекара, и false, если это не так.
-//    Пример:
-//    isKaprekar(3) ➞ false
-//    // n² = "9"
-//// Left + Right = 0 + 9 = 9 ➞ 9 !== 3
-//    isKaprekar(5) ➞ false
-//    // n² = "25"
-//// Left + Right = 2 + 5 = 7 ➞ 7 !== 5
-//    isKaprekar(297) ➞ true
-//// n² = "88209"
-//// Left + Right = 88 + 209 = 297 ➞ 297 === 297
-//    Примечание:
-//    Тривиально, 0 и 1-Это числа Капрекара, являющиеся единственными двумя числами,
-//    равными их квадрату.
-//8. Напишите функцию, которая возвращает самую длинную последовательность
+    public static boolean isKaprekar(long number) {
+        if (number == 1 || number == 0) {
+            return true;
+        }
+        if (number == 2 || number == 3) {
+            return false;
+        }
+        long newNumber = number * number;
+        int len = String.valueOf(newNumber).length();
+        len = len % 2 == 0 ? len / 2 : (len / 2) + 1;
+
+        StringBuilder del = new StringBuilder("1");
+        for (int i = 0; i < len; i++) {
+            del.append("0");
+        }
+        int delim = Integer.parseInt(String.valueOf(del));
+
+        long lefPart = newNumber / delim;
+        long rightPart = newNumber % delim;
+        // т.к. вторая часть не равняется нулю
+        if (rightPart == 0) {
+            return false;
+        }
+        return lefPart + rightPart == number;
+    }
+
+
+    //8. Напишите функцию, которая возвращает самую длинную последовательность
 //    последовательных нулей в двоичной строке.
-//            Пример:
-//    longestZero("01100001011000") ➞ "0000"
-//    longestZero("100100100") ➞ "00"
-//    longestZero("11111") ➞ ""
-//            9. Если задано целое число, создайте функцию, которая возвращает следующее
+    public static String longestZero(String number) {
+        StringBuilder nulls = new StringBuilder();
+
+        int length = 0;
+        int maxLength = 0;
+        char[] array = number.toCharArray();
+
+        for (int i = 0; i < array.length; i++) {
+            String current = String.valueOf(array[i]);
+            if (current.equals("0")) {
+                length++;
+            }
+
+            if (!current.equals("0")) {
+                length = 0;
+            }
+            maxLength = Math.max(maxLength, length);
+        }
+
+        for (int i = 0; i < maxLength; i++) {
+            nulls = nulls.append("0");
+        }
+        return String.valueOf(nulls);
+    }
+
+
+    //            9. Если задано целое число, создайте функцию, которая возвращает следующее
 //    простое число. Если число простое, верните само число.
-//            Пример:
-//    nextPrime(12) ➞ 13
-//    nextPrime(24) ➞ 29
-//    nextPrime(11) ➞ 11
-//// 11 is a prime, so we return the number itself.
+    public static int nextPrime(int number) {
+        if (isSimple(number)) {
+            return number;
+        }
+        while(!isSimple(number)) {
+            number++;
+        }
+        return number;
+    }
+
+    private static boolean isSimple(int number) {
+        if (number < 2)
+            return false;
+        double s = Math.sqrt(number);
+        for (int i = 2; i <= s; i++) {
+            if (number % i == 0)
+                return false;
+        }
+        return true;
+    }
+
+
 //            10. Учитывая три числа, x, y и z, определите, являются ли они ребрами
 //    прямоугольного треугольника.
-//    Пример:
-//    rightTriangle(3, 4, 5) ➞ true
-//    // This is the classic example of a "nice" right angled triangle.
-//    rightTriangle(145, 105, 100) ➞ true
-//    // This is a less famous example.
-//    rightTriangle(70, 130, 110) ➞ false
-//// This isn't a right angled triangle.
+    public static boolean rightTriangle(int x, int y, int z) {
+        if (!(x + y > z) || !(x + z > y) || !(y + z > x)) {
+            return false;
+        }
+        x *= x;
+        y *= y;
+        z *= z;
+        return x + y == z || x + z == y || y + z == x;
+    }
 }
