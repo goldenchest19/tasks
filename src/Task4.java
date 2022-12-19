@@ -1,44 +1,42 @@
-import java.util.ArrayList;
-import java.util.Spliterator;
+import java.util.*;
 
 public class Task4 {
 
     public static void main(String[] args) {
+//        test1
+        letterEditor(10, 7, "hello my name is Bessie and this is my essay");
 
 
-//        System.out.println(split("((()))").toString());
-//        System.out.println(split("((()))(())()()(()())").toString());
-//        System.out.println(split("((())())(()(()()))").toString());
-        //    split("()()()") ➞ ["()", "()", "()"]
-//    split("((()))") ➞ ["((()))"]
-//    split("((()))(())()()(()())") ➞ ["((()))", "(())", "()", "()",
-//            "(()())"]
-//    split("((())())(()(()()))") ➞ ["((())())", "(()(()()))"]
+//        test 2
+        System.out.println(split("((()))"));
+        System.out.println(split("((()))(())()()(()())"));
+        System.out.println(split("((())())(()(()()))"));
+
 
 //        test 3
-//        System.out.println(toCamelCase("hello_edabit"));
-//        System.out.println(toCamelCase("is_modal_open"));
-//        System.out.println(toSnakeCase("helloEdabit"));
-//        System.out.println(toSnakeCase("toSnakeCase"));
+        System.out.println(toCamelCase("hello_edabit"));
+        System.out.println(toCamelCase("is_modal_open"));
+        System.out.println(toSnakeCase("helloEdabit"));
+        System.out.println(toSnakeCase("toSnakeCase"));
 
 
 //        test 4
-//        System.out.println(overTime(9, 17, 30, 1.5F));
-//        System.out.println(overTime(16, 18, 30, 1.8F));
-//        System.out.println(overTime(13.25F, 15, 30, 1.5F));
-//        System.out.println(overTime(18, 20, 30, 2));
+        System.out.println(overTime(9, 17, 30, 1.5F));
+        System.out.println(overTime(16, 18, 30, 1.8F));
+        System.out.println(overTime(13.25F, 15, 30, 1.5F));
+        System.out.println(overTime(18, 20, 30, 2));
 
 
 //        test 5
-//        System.out.println(BMI("205 pounds", "73 inches"));
-//        System.out.println(BMI("55 kilos", "1.65 meters"));
-//        System.out.println(BMI("154 pounds", "2 meters"));
+        System.out.println(BMI("205 pounds", "73 inches"));
+        System.out.println(BMI("55 kilos", "1.65 meters"));
+        System.out.println(BMI("154 pounds", "2 meters"));
 
 
 //        test 6
-//        System.out.println(bugger(39));
-//        System.out.println(bugger(999));
-//        System.out.println(bugger(4));
+        System.out.println(bugger(39));
+        System.out.println(bugger(999));
+        System.out.println(bugger(4));
 
 
 //        test 7
@@ -46,52 +44,93 @@ public class Task4 {
         System.out.println(toStarShorthand("77777geff"));
         System.out.println(toStarShorthand("abc"));
         System.out.println(toStarShorthand(""));
-        System.out.println(toStarShorthand("sadsaabbcc"));
 
 
+//        test 8
+        System.out.println(doesRhyme("Sam I am!", "Green eggs and ham."));
+        System.out.println(doesRhyme("Sam I am!", "Green eggs and HAM."));
+        System.out.println(doesRhyme("You are off to the races", "a splendid day."));
+        System.out.println(doesRhyme("and frequently do?", "you gotta move."));
+        System.out.println(doesRhyme("and frequently dooooe?", "you gotta move."));
 
+
+//        test 9
+        System.out.println(trouble(451999277, 41177722899L));
+        System.out.println(trouble(1222345, 12345));
+        System.out.println(trouble(666789, 12345667));
+        System.out.println(trouble(33789, 12345337));
+        System.out.println(trouble(1234555, 1231319191955L));
+
+
+//        test 10
+        System.out.println(countUniqueBooks("AZYWABBCATTTA", 'A'));
+        System.out.println(countUniqueBooks("$AA$BBCATT$C$$B$", '$'));
+        System.out.println(countUniqueBooks("ZZABCDEF", 'Z'));
+
+        //    countUniqueBooks("AZYWABBCATTTA", 'A') ➞ 4
+//    // 1st bookend group: "AZYWA" : 3 unique books: "Z", "Y", "W"
+//// 2nd bookend group: "ATTTA": 1 unique book: "T"
+//    countUniqueBooks("$AA$BBCATT$C$$B$", '$') ➞ 3
+//    countUniqueBooks("ZZABCDEF", 'Z') ➞ 0
 
     }
 
-//    lst = input().split()
-//    n, k = map(int, lst.pop(0).split(','))
-//    i = 0
-//    s = ''
-//    spaces = 0
-//    while i<n:
-//      while i<n and len(s)+len(lst[i])-spaces <= k:
-//          s += lst[i] + ' '
-//          spaces += 1
-//          i += 1
-//      s.rstrip()
-//      print(s)
-//      s = ''
-//      spaces = 0
+//    1. Бесси работает над сочинением для своего класса писателей. Поскольку ее почерк
+//    довольно плох, она решает напечатать эссе с помощью текстового процессора.
+//    Эссе содержит N слов (1≤N≤100), разделенных пробелами. Каждое слово имеет
+//    длину от 1 до 15 символов включительно и состоит только из прописных или
+//    строчных букв. Согласно инструкции к заданию, эссе должно быть
+//    отформатировано очень специфическим образом: каждая строка должна содержать
+//    не более K (1≤K≤80) символов, не считая пробелов. К счастью, текстовый
+//    процессор Бесси может справиться с этим требованием, используя следующую
+//    стратегию:
+//            – Если Бесси набирает Слово, и это слово может поместиться в текущей строке, поместите
+//    его в эту строку. В противном случае поместите слово на следующую строку и
+//    продолжайте добавлять к этой строке. Конечно, последовательные слова в одной строке
+//    все равно должны быть разделены одним пробелом. В конце любой строки не должно
+//    быть места.
+//            – К сожалению, текстовый процессор Бесси только что сломался. Пожалуйста,
+//    помогите ей правильно оформить свое эссе!
+//    Вам будут даны n, k и строка
 
     public static void letterEditor(int n, int k, String line) {
         String[] arrayWords = line.split(" ");
-        String prevEl = arrayWords[0];
-        for (int i = 1; i < n; i++) {
+        int i = 0;
+        String finalString = "";
+        String forCheck = "";
+        while (i < n) {
+            while (i < n && forCheck.length() + arrayWords[i].length() <= k) {
+                finalString += arrayWords[i] + " ";
+                forCheck += arrayWords[i];
 
-            while (prevEl.length() + arrayWords[i].length() <= k) {
-
+                i += 1;
             }
-
-
+            System.out.println(finalString);
+            finalString = "";
+            forCheck = "";
         }
     }
 
-//    Напишите функцию, которая группирует строку в кластер скобок. Каждый кластер
+    //    Напишите функцию, которая группирует строку в кластер скобок. Каждый кластер
 //    должен быть сбалансирован.
-//            Пример:
-//    split("()()()") ➞ ["()", "()", "()"]
-//    split("((()))") ➞ ["((()))"]
-//    split("((()))(())()()(()())") ➞ ["((()))", "(())", "()", "()",
-//            "(()())"]
-//    split("((())())(()(()()))") ➞ ["((())())", "(()(()()))"]
-
-    public static String[] split(String line) {
-        return line.split(" ");
+    public static ArrayList<String> split(String line) {
+        int opened = 0;
+        String buffer = "";
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (int i = 0; i < line.length(); i++) {
+            char currentCharacter = line.charAt(i);
+            if (currentCharacter == '(') {
+                opened++;
+            } else if (currentCharacter == ')') {
+                opened--;
+            }
+            buffer = buffer.concat(Character.toString(currentCharacter));
+            if (opened == 0 && currentCharacter == ')') {
+                arrayList.add(buffer);
+                buffer = "";
+            }
+        }
+        return arrayList;
     }
 
 
@@ -132,7 +171,7 @@ public class Task4 {
     }
 
 
-//    4. Напишите функцию, которая вычисляет сверхурочную работу и оплату, связанную
+    //    4. Напишите функцию, которая вычисляет сверхурочную работу и оплату, связанную
 //    с сверхурочной работой.
 //    Работа с 9 до 5: обычные часы работы
 //    После 5 вечера это сверхурочная работа
@@ -143,7 +182,6 @@ public class Task4 {
 //– Множитель сверхурочных работ
 //    Ваша функция должна возвращать:
 //    $ + заработанные в тот день (округлены до ближайшей сотой)
-
     public static String overTime(float... massive) {
         float startDay = massive[0];
         float endDay = massive[1];
@@ -154,7 +192,6 @@ public class Task4 {
 
         if (startDay - (int) startDay != 0) {
             salary += ((int) startDay - startDay) * hourlyRate;
-//            startDay++;
         }
 
         for (float i = startDay; i < endDay; i++) {
@@ -176,7 +213,7 @@ public class Task4 {
 //    Нормальный вес: 18.5-24.9
 //    Избыточный вес: 25 и более
 //    Создайте функцию, которая будет принимать вес и рост (в килограммах, фунтах,
-//                                                          метрах или дюймах) и возвращать ИМТ и связанную с ним категорию. Округлите
+//             метрах или дюймах) и возвращать ИМТ и связанную с ним категорию. Округлите
 //    ИМТ до ближайшей десятой.
     public static String BMI(String weight, String height) {
         String[] weightArray = weight.split(" ");
@@ -199,7 +236,6 @@ public class Task4 {
         BMI = weightNumber / (heightNumber * heightNumber);
         String BMIString = String.format("%.1f", BMI);
 
-
         if (BMI < 18.5) {
             return BMIString + " Underweight";
         } else if (BMI >= 18.5 && BMI < 25) {
@@ -209,18 +245,9 @@ public class Task4 {
     }
 
 
-//    6. Создайте функцию, которая принимает число и возвращает его мультипликативное
+    //    6. Создайте функцию, которая принимает число и возвращает его мультипликативное
 //    постоянство, которое представляет собой количество раз, которое вы должны
 //    умножать цифры в num, пока не достигнете одной цифры.
-//    Пример:
-//    bugger(39) ➞ 3
-//    // Because 3 * 9 = 27, 2 * 7 = 14, 1 * 4 = 4 and 4 has only one digit.
-//    bugger(999) ➞ 4
-//// Because 9 * 9 * 9 = 729, 7 * 2 * 9 = 126, 1 * 2 * 6 = 12, and
-//            finally 1 * 2 = 2.
-//    bugger(4) ➞ 0
-//// Because 4 is already a one-digit number.
-
     public static int bugger(int number) {
         int newNumber = number;
         int count = 0;
@@ -238,23 +265,16 @@ public class Task4 {
     }
 
 
-//    Напишите функцию, которая преобразует строку в звездную стенографию. Если
+    // 7.   Напишите функцию, которая преобразует строку в звездную стенографию. Если
 //    символ повторяется n раз, преобразуйте его в символ*n.
-//            Пример:
-//    toStarShorthand("abbccc") ➞ "ab*2c*3"
-//    toStarShorthand("77777geff") ➞ "7*5gef*2"
-//    toStarShorthand("abc") ➞ "abc"
-//    toStarShorthand("") ➞ ""
-
     public static String toStarShorthand(String line) {
         if (line.isEmpty()) {
             return "";
         }
         String changeLine = line;
-        char prevEl = line.charAt(0);
         boolean flag = false;
         int count = 1;
-        char var = prevEl;
+        char var = line.charAt(0);
         for (int i = 0; i < line.length() - 1; i++) {
             if (line.charAt(i) == line.charAt(i + 1)) {
                 count++;
@@ -277,7 +297,107 @@ public class Task4 {
             }
         }
         return changeLine;
-
     }
 
+//    8. Создайте функцию, которая возвращает true, если две строки рифмуются, и false в
+//    противном случае. Для целей этого упражнения две строки рифмуются, если
+//    последнее слово из каждого предложения содержит одни и те же гласные.
+
+    public static boolean doesRhyme(String firstLine, String secondLine) {
+//        firstLine = firstLine;
+//        secondLine = secondLine;
+        String[] mas1 = firstLine.split(" ");
+        String[] mas2 = secondLine.split(" ");
+        HashSet<Character> hashSet1 = new HashSet<>();
+        HashSet<Character> hashSet2 = new HashSet<>();
+
+        String lastWord1 = mas1[mas1.length - 1].toLowerCase();
+        String lastWord2 = mas2[mas2.length - 1].toLowerCase();
+
+        for (char letter : lastWord1.toCharArray()) {
+            if ("qeyioa".indexOf(letter) != -1) {
+                hashSet1.add(letter);
+            }
+        }
+
+        for (char letter : lastWord2.toCharArray()) {
+            if ("qeyioa".indexOf(letter) != -1) {
+                hashSet2.add(letter);
+            }
+        }
+        return hashSet1.containsAll(hashSet2);
+    }
+
+
+    //    9. Создайте функцию, которая принимает два целых числа и возвращает true, если
+//    число повторяется три раза подряд в любом месте в num1 и то же самое число
+//    повторяется два раза подряд в num2.
+    public static boolean trouble(long firstNumber, long secondNumber) {
+        HashMap<Character, Integer> hashMap1 = new HashMap<>();
+        HashMap<Character, Integer> hashMap2 = new HashMap<>();
+
+        char[] arrayFirstNumber = Long.toString(firstNumber).toCharArray();
+        char[] arraySecondNumber = Long.toString(secondNumber).toCharArray();
+
+
+        for (char digit : arrayFirstNumber) {
+            // читаем текущее значение счетчика
+            Integer count = hashMap1.get(digit);
+            // если число раньше не встречалось, то его нет в словаре
+            if (count == null)
+                count = 0;
+            // увеличиваем значение счетчика
+            count++;
+            // записываем новое значение
+            hashMap1.put(digit, count);
+        }
+
+        for (char digit : arraySecondNumber) {
+            Integer count = hashMap2.get(digit);
+            if (count == null)
+                count = 0;
+            count++;
+            hashMap2.put(digit, count);
+        }
+
+        Character key = 0;
+        for (Map.Entry<Character, Integer> characterIntegerEntry : hashMap1.entrySet()) {
+            if (characterIntegerEntry.getValue() == 3) {
+                key = characterIntegerEntry.getKey();
+            }
+        }
+
+        return key == 0 ? false : hashMap2.get(key) == 2;
+    }
+
+//    10. Предположим, что пара одинаковых символов служит концами книги для всех
+//    символов между ними. Напишите функцию, которая возвращает общее количество
+//    уникальных символов (книг, так сказать) между всеми парами концов книги.
+//    Эта функция будет выглядеть следующим образом:
+//    countUniqueBooks("stringSequence", "bookEnd")
+//    Пример:
+//    countUniqueBooks("AZYWABBCATTTA", 'A') ➞ 4
+//    // 1st bookend group: "AZYWA" : 3 unique books: "Z", "Y", "W"
+//// 2nd bookend group: "ATTTA": 1 unique book: "T"
+//    countUniqueBooks("$AA$BBCATT$C$$B$", '$') ➞ 3
+//    countUniqueBooks("ZZABCDEF", 'Z') ➞ 0
+
+    public static int countUniqueBooks(String line, char marker) {
+        Set<Character> characters = new HashSet<>();
+        boolean flag = false;
+        for (int i = 0; i < line.length(); i++) {
+            char currentCharacter = line.charAt(i);
+
+            if (currentCharacter == marker) {
+                if (flag) {
+                    flag = false;
+                } else {
+                    flag = true;
+                }
+            } else if (flag) {
+                characters.add(currentCharacter);
+            }
+        }
+        return characters.size();
+    }
 }
