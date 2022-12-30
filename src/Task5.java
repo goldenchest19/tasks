@@ -1,4 +1,5 @@
 import java.security.MessageDigest;
+import java.sql.SQLOutput;
 import java.util.*;
 
 public class Task5 {
@@ -12,10 +13,49 @@ public class Task5 {
         System.out.println();
 
         System.out.println("task 2");
-        System.out.println(canMove("ладья", "A8", "H8"));
-        System.out.println(canMove("слон", "A7", "G1"));
-        System.out.println(canMove("ферзь", "C4", "D6"));
+        System.out.println("Rook");
+        System.out.println(canMove("Rook", "A8", "H8")); // true
+        System.out.println(canMove("Rook", "A8", "A1")); // true
+        System.out.println(canMove("Rook", "A1", "A8")); // true
+        System.out.println(canMove("Rook", "B3", "H3")); // true
+        System.out.println(canMove("Rook", "A1", "H8")); // false
+        System.out.println("Bishop");
+        System.out.println(canMove("Bishop", "A7", "G1")); // true
+        System.out.println(canMove("Bishop", "B1", "H7")); // true
+        System.out.println(canMove("Bishop", "H7", "B1")); // true
+        System.out.println(canMove("Bishop", "A8", "H1")); // true
+        System.out.println(canMove("Bishop", "F1", "B5")); // true
         System.out.println();
+        System.out.println(canMove("Queen", "C4", "D6")); // false
+        System.out.println(canMove("Queen", "C4", "D5")); // true
+        System.out.println(canMove("Horse", "E4", "D6")); // true
+        System.out.println(canMove("Pawn", "A4", "A5")); // true
+        System.out.println();
+        System.out.println("king");
+        System.out.println(canMove("King", "E4", "D4")); // true
+        System.out.println(canMove("King", "E4", "D5")); // true
+        System.out.println(canMove("King", "E4", "D3")); // true
+        System.out.println(canMove("King", "E4", "E5")); // true
+        System.out.println(canMove("King", "E4", "E3")); // true
+        System.out.println(canMove("King", "E4", "F5")); // true
+        System.out.println(canMove("King", "E4", "F4")); // true
+        System.out.println(canMove("King", "E4", "F3")); // true
+
+        System.out.println();
+
+        // пешка - на один ход вперед
+        // слон - диагонально
+        // ладья - Ладья умеет ходить по любым прямым линиям — вертикалям и горизонталям, н
+        // а любое количество клеток, пока перед ней не возникнет препятствие.
+        // ферзь - прямо и по диагонали
+        // король - на одну клетку в любом направление
+
+//        "Horse"; // конь
+//        "Bishop"; // слон
+//        "Queen"; // ферзь
+//        "Rook"; // ладья
+//        "Pawn"; // пешка
+//        "King";
 
         System.out.println("task 3");
         System.out.println(canComplete("butl", "beautiful"));
@@ -45,6 +85,7 @@ public class Task5 {
         System.out.println(numToEng(0));
         System.out.println(numToEng(18));
         System.out.println(numToEng(134));
+        System.out.println(numToEng(167));
         System.out.println(numToEng(895));
         System.out.println(numToRus(0));
         System.out.println(numToRus(18));
@@ -73,7 +114,6 @@ public class Task5 {
         System.out.println();
         hexLattice(21);
         System.out.println();
-
     }
 
     //    1. Пришло время отправлять и получать секретные сообщения.
@@ -107,31 +147,58 @@ public class Task5 {
     //    2. Создайте функцию, которая принимает имя шахматной фигуры, ее положение и
 //    целевую позицию. Функция должна возвращать true, если фигура может двигаться
 //    к цели, и false, если она не может этого сделать.
-//    Возможные входные данные - "пешка", "конь", "слон", "Ладья", "Ферзь"и " король".
-    public static boolean canMove(String name, String a, String b) {
-        char[] x = a.toCharArray();
-        char[] y = b.toCharArray();
-        int x0 = x[0];
-        int y0 = y[0];
-        int x1 = x[1];
-        int y1 = y[1];
+//    Возможные входные данные - "пешка", "конь", "слон", "Ладья", "Ферзь"и " король"
+    // пешка - на один ход вперед
+    // слон - диагонально
+    // ладья - Ладья умеет ходить по любым прямым линиям — вертикалям и горизонталям, н
+    // а любое количество клеток, пока перед ней не возникнет препятствие.
+    // ферзь - прямо и по диагонали
+    // король - на одну клетку в любом направление
+    //        "Horse"; // конь
+//        "Bishop"; // слон
+//        "Queen"; // ферзь
+//        "Rook"; // ладья
+//        "Pawn"; // пешка
+//        "King";
+    public static boolean canMove(String figure, String from, String to) {
+        boolean flag = false;
+        int x0 = from.charAt(0);
+        int x1 = to.charAt(0);
+        int y0 = from.charAt(1);
+        int y1 = to.charAt(1);
 
-        return switch (name) {
-            case ("пешка") -> (Math.abs(x0 - y0) == 1) && (Math.abs(x1 - y1) == 1);
-
-            case ("конь") -> (Math.abs(x0 - y0) == 1) && (Math.abs(x1 - y1) == 2) ||
-                    (Math.abs(x0 - y0) == 2) && (Math.abs(x1 - y1) == 1);
-
-            case ("слон") -> (Math.abs(x0 - y0) == Math.abs(x1 - y1));
-
-            case ("ладья") -> (Math.abs(x0 - y0) == 0) || (Math.abs(x1 - y1) == 0);
-
-            case ("ферзь") -> (Math.abs(x0 - y0) == Math.abs(x1 - y1)) ||
-                    (Math.abs(x0 - y0) == 0) || (Math.abs(x1 - y1) == 0);
-
-            case ("король") -> (Math.abs(x0 - y0) == 1) || (Math.abs(x1 - y1) == 1);
-            default -> false;
-        };
+        if (figure.equals("Pawn")) {
+            if ((x0 == x1) && (y1 - y0 == 1)) {
+                flag = true;
+            }
+        } else if (figure.equals("Horse")) {
+           if (((Math.abs(x0 - x1) == 2) && (Math.abs(y0 - y1) == 1)) ||
+                    ((Math.abs(x0 - x1) == 1) && (Math.abs(y0 - y1) == 2))) {
+               flag = true;
+           }
+        } else if (figure.equals("Bishop")) {
+            //слон находится по диагонали от исходной клетки -> модули разности координат ==
+            if (Math.abs(x0 - x1) == Math.abs(y0 - y1)) {
+                flag = true;
+            }
+        } else if (figure.equals("Rook")) {
+            // ладья
+            if ((x0 == x1) || (y0 == y1)) {
+                flag = true;
+            }
+        } else if (figure.equals("Queen")) {
+            // ферзь
+            if ((Math.abs(x0 - x1) == Math.abs(y0 - y1))
+                    || ((x0 == x1) || (y0 == y1))) {
+                flag = true;
+            }
+        } else if (figure.equals("King")) {
+            if ((Math.abs(x0 - x1) == 1)
+                    || (Math.abs(y0 - y1) == 1)) {
+                flag = true;
+            }
+        }
+        return flag;
     }
 
     //    3. Входная строка может быть завершена, если можно добавить дополнительные
@@ -141,6 +208,8 @@ public class Task5 {
 //    Создайте функцию, которая, учитывая входную строку, определяет, может ли слово быть
 //    завершено.
     public static boolean canComplete(String subline, String line) {
+        // Идём по строке, сравнивая поочерёдно с каждым символом субстроки.
+        // Если длина субстроки равна количеству совпадений - true
         int count = 0;
         for (int i = 0; i < line.length(); i++) {
             if (line.charAt(i) == subline.charAt(count)) {
@@ -155,9 +224,9 @@ public class Task5 {
 //    вместе и возвращает произведение цифр до тех пор, пока ответ не станет длиной
 //    всего в 1 цифру.
     public static int sumDigProd(int... massive) {
-        int number = 1;
+        int number = 0;
         for (int i : massive) {
-            number *= i;
+            number += i;
         }
         while (number > 9) {
             int tempNumber = 1;
@@ -176,13 +245,13 @@ public class Task5 {
     public static List<String> sameVowelGroup(String... lines) {
         List<String> result = new ArrayList<>();
         Set<Character> set = new HashSet<>();
-        // по умолчанию вводим первое слово, вносим все его гласные в set, глассные находим через регулярку
+        // по умолчанию вводим первое слово, вносим все его гласные в set
         result.add(lines[0]);
         String vowelLettersFirstWord = lines[0].replaceAll("[^aeiouy]", "");
         for (int i = 0; i < vowelLettersFirstWord.length(); i++) {
             set.add(vowelLettersFirstWord.charAt(i));
         }
-        // идём по всем строка, начиная со второй, сравниваем гласные с теми, что есть в set
+        // идём по всем строкам, начиная со второй, сравниваем гласные с теми, что есть в set
         for (int i = 1; i < lines.length; i++) {
             String vowelLetters = lines[i].replaceAll("[^aeiouy]", "");
             boolean flag = true;
@@ -211,7 +280,14 @@ public class Task5 {
 //            – Добавьте все цифры.
 //– Вычтите последнюю цифру суммы (из шага 4) из 10. Результат должен быть равен
 //    контрольной цифре из Шага 1.
-
+// Step 1: check digit = 6, num = 123456789012345
+// Step 2: num reversed = 543210987654321
+// Step 3: digit array after selective doubling: [1, 4, 6, 2, 2, 0, 9,
+//8, 5, 6, 1, 4, 6, 2, 2]
+// Step 4: sum = 58
+// Step 5: 10 - 8 = 2 (not equal to 6) ➞ false
+//    validateCard(1234567890123452) ➞ true
+    // Same as above, but check digit checks out.
     public static boolean validateCard(Long number) {
         if (number < Math.pow(10, 14) || number >= Math.pow(10, 20)) {
             return false;
@@ -241,7 +317,9 @@ public class Task5 {
 //    написанное на английском, руссском языке.
     public static String numToEng(int n) {
         StringBuilder result = new StringBuilder();
-        if (n == 0) return result.append("zero").toString();
+        if (n == 0) {
+            return result.append("zero").toString();
+        }
         String[] SUBTWENTY = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
                 "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
         String[] DECADES = {"twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
@@ -249,7 +327,7 @@ public class Task5 {
             result.append(String.format("%s hundred ", SUBTWENTY[n / 100]));
         }
         if (n % 100 >= 20) {
-            result.append(String.format("%s %s ", DECADES[n % 100 / 10 - 2], SUBTWENTY[n % 10]));
+            result.append(String.format("%s %s ", DECADES[(n % 100 / 10) - 2], SUBTWENTY[n % 10]));
         } else {
             result.append(SUBTWENTY[n % 100]);
         }
@@ -258,13 +336,15 @@ public class Task5 {
 
     public static String numToRus(int n) {
         StringBuilder result = new StringBuilder();
-        if (n == 0) return result.append("ноль").toString();
+        if (n == 0) {
+            return result.append("ноль").toString();
+        }
         String[] SUBTWENTY = {"", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять",
-                "десять", "одинадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать",
+                "десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать",
                 "семнадцать", "восемнадцать", "девятнадцать"};
         String[] DECADES = {"двадцать", "тридцать", "сорок", "пятьдесят",
                 "шестьдесят", "семьдесят", "восемьдесят", "девяносто"};
-        String[] HUNDREDS = {"", "сто ", "двесте ", "триста ", "четыреста ",
+        String[] HUNDREDS = {"", "сто ", "двести ", "триста ", "четыреста ",
                 "пятьсот ", "шестьсот ", "семьсот ", "восемьсот ", "девятьсот "};
         result.append(HUNDREDS[n / 100]);
         if (n % 100 >= 20) {
@@ -285,7 +365,9 @@ public class Task5 {
             StringBuilder hexString = new StringBuilder();
             for (int i : hash) {
                 String hex = Integer.toHexString(0xff & i);
-                if (hex.length() == 1) hexString.append('0');
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
                 hexString.append(hex);
             }
             return hexString.toString();
@@ -298,21 +380,16 @@ public class Task5 {
 //    регистром для заголовков символов в серии "Игра престолов".
 //    Слова and, the, of и in должны быть строчными. Все остальные слова должны иметь
 //    первый символ в верхнем регистре, а остальные-в Нижнем.
-    public static String correctTitle(String text) {
-        StringBuilder finalString = new StringBuilder(
-                text.toLowerCase());
-        //делаем первый символ прописным
-        finalString.setCharAt(0, Character.
-                toUpperCase(
-                        text.charAt(0)));
-        //крутимся в цикле, и меняем буквы, перед которыми пробел на заглавные + требует проверки, что слово не является служебной частью речи
-        // в цикле меняем первую букву на заглавную в соответствие с требованиями
-        for (int i = 1; i < text.length(); i++) {
-            if (Character.isSpaceChar(text.charAt(i - 1)) && !finalString.substring(i, i + 3).matches("of |in |the|and")) {
-                finalString.setCharAt(i, Character.toUpperCase(text.charAt(i)));
+    public static String correctTitle(String s) {
+        String[] words = s.toLowerCase().split(" ");
+        StringJoiner joiner = new StringJoiner(" ");
+        for (String word : words) {
+            if (!word.equals("of") && !word.equals("in") && !word.equals("and") && !word.equals("the")) {
+                word = word.substring(0, 1).toUpperCase() + word.substring(1);
             }
+            joiner.add(word);
         }
-        return finalString.toString();
+        return joiner.toString();
     }
 
     //    10. Как указано в онлайн-энциклопедии целочисленных последовательностей:
